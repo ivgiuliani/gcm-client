@@ -20,7 +20,7 @@ def is_api_key_valid(api_key):
     request = requests.post(
         GCM_SERVER,
         headers=build_headers(api_key),
-        data=payload
+        data=json.dumps(payload)
     )
 
     return request.status_code != 401
@@ -53,7 +53,7 @@ def send(api_key, to, data, collapse_key=None, ttl=None, delay_while_idle=None):
     request = requests.post(
         GCM_SERVER,
         headers=build_headers(api_key),
-        data=payload
+        data=json.dumps(payload)
     )
 
     if request.status_code != 200:
