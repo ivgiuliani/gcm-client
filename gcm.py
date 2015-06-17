@@ -56,6 +56,9 @@ def send(api_key, to, data, collapse_key=None, ttl=None, delay_while_idle=None):
         data=json.dumps(payload)
     )
 
+    print("Request:")
+    print(json.dumps(payload, indent=4))
+
     if request.status_code != 200:
         raise Exception(
             "invalid request: " + request.text.strip() + " (status code = " + str(request.status_code) + ")"
@@ -82,8 +85,8 @@ def main(args):
 
     input_object = json.loads(data)
 
-    print("Response:")
     response = send(api_key, to, input_object)
+    print("Response:")
     print(json.dumps(response, indent=4))
 
     return False
